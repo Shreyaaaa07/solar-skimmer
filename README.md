@@ -21,6 +21,7 @@ No build step, package manager, or server is required.
 | `Space`, `↑`, or `W` | Boost / jump; starts or restarts a flight |
 | Hold `↓` or `S` | Duck on the ground / dive while airborne |
 | Click or tap the game canvas | Boost; starts or restarts a flight |
+| Android touch controls | Tap **BOOST** to jump; hold **DUCK** to duck or dive |
 | **Launch flight** button | Start a new flight |
 
 ## Gameplay
@@ -38,8 +39,8 @@ No build step, package manager, or server is required.
 - Hand-drawn, low-resolution pixel-art scene rendered entirely in JavaScript
 - Animated desert background, stars, sunrise, scrolling terrain, dust, and impact sparks
 - Increasing difficulty through progressive speed and varied obstacles
-- Keyboard, mouse, and touch-friendly controls
-- Responsive game shell that adapts to desktop and mobile-sized screens
+- Keyboard, mouse, and Android touch controls, including a hold-to-duck button
+- Responsive game shell with Android safe-area padding and touch-action handling
 - Local persistent high score
 
 ## Project Structure
@@ -58,7 +59,7 @@ solar-skimmer/
 
 ## Browser Support
 
-Solar Skimmer is intended for current evergreen browsers that support HTML5 Canvas, `requestAnimationFrame`, ES6 JavaScript, and `localStorage`—including recent versions of Chrome, Edge, Firefox, and Safari.
+Solar Skimmer supports current evergreen browsers with HTML5 Canvas, `requestAnimationFrame`, ES6 JavaScript, and `localStorage`—including Chrome, Edge, Firefox, Safari, and current Android Chrome, Firefox, and Samsung Internet. On touch devices, on-screen **BOOST** and **DUCK** controls appear automatically.
 
 ## Development
 

@@ -20,5 +20,17 @@
   function drawHazard(h){if(h.kind==='drone'){let flap=Math.floor(t*10+h.phase)%2;rect('#432e55',h.x+4,h.y+9,50,11);rect('#9182c2',h.x+(flap?3:7),h.y+(flap?3:1),14,8);rect('#9182c2',h.x+(flap?39:36),h.y+(flap?3:1),14,8);rect('#ffcc70',h.x+34,h.y+12,5,4);rect('#6ee6df',h.x+25,h.y+6,8,4);return}if(h.kind==='pylon'){rect('#55304c',h.x+4,h.y+9,h.w-8,h.h-9);rect('#f58b58',h.x+8,h.y+13,5,h.h-18);rect('#ffce74',h.x+h.w/2-2,h.y+23,4,11)}else{rect('#613856',h.x+4,h.y+9,h.w-8,h.h-9);rect('#e95d62',h.x+9,h.y+5,h.w-18,h.h-13);rect('#ffd176',h.x+10,h.y+10,5,h.h-20)}}
   function draw(){x.imageSmoothingEnabled=false;scene();hazards.forEach(drawHazard);for(const p of dust){x.globalAlpha=cap(p.life/p.max,0,1);rect(p.type==='spark'?'#fff0a5':'#ffc079',p.x,p.y,p.size,p.size)}x.globalAlpha=1;drawCraft()}
   function frame(now){let dt=last?Math.min((now-last)/1000,.04):0;last=now;if(!live)t+=dt;update(dt);draw();requestAnimationFrame(frame)}
-  $('#start').onclick=reset;overlay.addEventListener('pointerdown',e=>{if(e.target===overlay)reset()});c.onclick=()=>live?boost():reset();window.addEventListener('keydown',e=>{if(['Space','ArrowUp','KeyW'].includes(e.code)){e.preventDefault();if(!e.repeat)live?boost():reset()}if(['ArrowDown','KeyS'].includes(e.code)){e.preventDefault();duckKey=true;if(live){if(craft.onGround)craft.duck=true;else dive()}}});window.addEventListener('keyup',e=>{if(['ArrowDown','KeyS'].includes(e.code)){duckKey=false;if(live)craft.duck=false}});window.addEventListener('blur',()=>duckKey=false);hud();craft={x:125,y:FLOOR-46,onGround:true};requestAnimationFrame(frame);
+  function startOrBoost(){live?boost():reset()}
+  function holdDuck(){duckKey=true;if(live){if(craft.onGround)craft.duck=true;else dive()}}
+  function releaseDuck(){duckKey=false;if(live)craft.duck=false}
+  function bindHold(el,down,up){el.addEventListener('pointerdown',e=>{e.preventDefault();el.setPointerCapture?.(e.pointerId);down()});['pointerup','pointercancel','lostpointercapture'].forEach(type=>el.addEventListener(type,up))}
+  $('#start').onclick=reset;
+  overlay.addEventListener('pointerdown',e=>{if(e.target===overlay)reset()});
+  c.addEventListener('pointerdown',e=>{e.preventDefault();startOrBoost()});
+  bindHold($('#boost-control'),startOrBoost,()=>{});
+  bindHold($('#duck-control'),holdDuck,releaseDuck);
+  window.addEventListener('keydown',e=>{if(['Space','ArrowUp','KeyW'].includes(e.code)){e.preventDefault();if(!e.repeat)startOrBoost()}if(['ArrowDown','KeyS'].includes(e.code)){e.preventDefault();holdDuck()}});
+  window.addEventListener('keyup',e=>{if(['ArrowDown','KeyS'].includes(e.code))releaseDuck()});
+  window.addEventListener('blur',releaseDuck);
+  hud();craft={x:125,y:FLOOR-46,onGround:true};requestAnimationFrame(frame);
 })();
