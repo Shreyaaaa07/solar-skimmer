@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Solar Skimmer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header><a class="logo" href="#"><i>☀</i> SOLAR <b>SKIMMER</b></a><div class="scores"><div><small>ALTITUDE</small><output id="score">00000</output></div><div><small>BEST FLIGHT</small><output id="best">00000</output></div></div></header>
+    <section class="game-wrap" aria-label="Solar Skimmer endless runner"><canvas id="game" width="960" height="360" role="img" aria-label="A solar skimmer races across a desert. Space jumps and Down ducks."></canvas><div id="overlay" class="overlay"><article><div id="symbol" class="symbol">☀</div><p id="tag">DAWN PATROL · SECTOR 12</p><h1 id="heading">Ride the sunrise</h1><p id="message">Pilot Nova's solar skimmer through the red dunes. The horizon gets faster with every kilometer.</p><button id="start">Launch flight <span>→</span></button><em>PRESS <kbd>SPACE</kbd> TO BOOST</em></article></div></section>
+    <footer><span><i></i> One small craft. One huge horizon.</span><span><kbd>SPACE</kbd> / <kbd>↑</kbd> boost &nbsp;·&nbsp; hold <kbd>↓</kbd> to duck / dive</span></footer>
+  </main><script src="game.js"></script>
+</body>
+</html>
